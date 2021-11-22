@@ -1,3 +1,7 @@
+This is fork of old J Tech Photonics Laser Tool before they switched to new library.
+Added is path Tree sort which provide cutting of inner paths first. This prevent details to fall until thei holes are not completely finished.
+
+
 # J Tech Photonics Laser Tool
 
 This is the new official home for the JTP laser cutting Inkscape extension.
