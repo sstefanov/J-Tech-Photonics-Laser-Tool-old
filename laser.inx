@@ -16,6 +16,8 @@
 	<param name="directory" type="string" _gui-text="Directory:"></param>
 	<param name="filename" type="string" _gui-text="Filename:">output.gcode</param>
 	<param name="add-numeric-suffix-to-filename" type="boolean" _gui-text="Add numeric suffix to filename">true</param>
+	<param name="create-log" type="boolean" _gui-text="Create log">true</param>
+	<param name="log-filename" type="string" _gui-text="Log filename:">/tm,p/laser.log</param>
 
   <param name="unit" type="enum" _gui-text="All Units (mm or in):">
     <item value="G21 (All units in mm)">mm</item>

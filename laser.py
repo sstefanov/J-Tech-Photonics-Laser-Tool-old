@@ -26,6 +26,14 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 """
+
+#laser.py --id=g76 --laser-command=M4 --laser-off-command=M05 --travel-speed=3000 --laser-speed=120 --laser-power=800 --power-delay=0 --passes=3 --pass-depth=0 --directory=/tmp --filename=test.gcode --add-numeric-suffix-to-filename=true --create-log=true --log-filename=/tmp/laser.log --unit=G21 (All units in mm) /tmp/ink_ext_XXXXXX.svgV8H6C1
+
+import sys
+#debug imports
+sys.path.append('/usr/share/inkscape/extensions')
+#sys.path.append('/Applications/Inkscape.app/Contents/Resources/extensions') 
+
 import inkex
 from inkex.transforms import Transform
 from inkex.paths import Path
@@ -34,10 +42,10 @@ import os
 import math
 
 import re
-import sys
 import time
 import numpy
 import gettext
+
 
 # additional imports
 from svgpathtools import *
@@ -1472,7 +1480,7 @@ class LaserGcode(inkex.Effect):
                 for path in self.selected_paths[layer]:
                     if self.options.dxfpoints_action == 'replace':
                         path.set("dxfpoint", "1")
-                        r = re.match("^\s*.\s*(\S+)", path.get("d"))
+                        r = re.match(r"^\s*.\s*(\S+)", path.get("d"))
                         if r != None:
                             print_(("got path=", r.group(1)))
                             path.set("d",
@@ -1756,8 +1764,18 @@ class LaserGcode(inkex.Effect):
         self.laser()
 
 
+logfile = open("/tmp/logfile.txt", "w")
+logfile.write(" ".join(sys.argv))
+logfile.close()
 e = LaserGcode()
 if target_version < 1.0:
     e.affect()
 else:
     e.run()
+    
+if __name__ == "__main__":
+    try:
+        import inkscape_ExtensionDevTools
+        inkscape_ExtensionDevTools.inkscape_run_debug()
+    except:
+        pass
